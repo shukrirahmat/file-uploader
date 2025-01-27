@@ -2,6 +2,7 @@ const express = require("express")
 const app = express();
 const path = require("node:path");
 const indexRouter = require("./routes/indexRouter");
+const signUpRouter = require("./routes/signUpRouter");
 
 
 //Middleware
@@ -16,7 +17,8 @@ app.use(express.urlencoded({ extended: true }));
 
 
 // Routes
-app.get("/", indexRouter);
+app.use("/", indexRouter);
+app.use("/sign-up", signUpRouter);
 
 
 

@@ -1,5 +1,5 @@
 const getHomepage = (req, res) => {
-    res.render("homepage", {title: "Homepage"});
+    res.render("home", {title: "Homepage"});
 }
 
 module.exports = {
