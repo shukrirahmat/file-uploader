@@ -1,10 +1,22 @@
 const express = require("express")
-
 const app = express();
+const path = require("node:path");
+const indexRouter = require("./routes/indexRouter");
 
-app.get("/", (req, res) => {
-    res.send("WELL, HELLO!")
-})
+
+//Middleware
+
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "ejs");
+app.use(express.static("public"));
+app.use(express.urlencoded({ extended: true }));
+
+
+
+
+
+// Routes
+app.get("/", indexRouter);
 
 
 
