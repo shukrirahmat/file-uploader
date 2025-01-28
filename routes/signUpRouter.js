@@ -1,9 +1,9 @@
 const { Router } = require("express");
 const router = Router();
 const signUpController = require("../controllers/signUpController");
-const alreadyLogged = require("../controllers/alreadyLogged");
+const checkLoggedIn = require("../controllers/checkLoggedIn");
 
-router.get("/", alreadyLogged, signUpController.getSignUpPage);
+router.get("/", checkLoggedIn, signUpController.getSignUpPage);
 router.post("/", signUpController.signUpUser);
 
 module.exports = router;
