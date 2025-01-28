@@ -3,6 +3,10 @@ const app = express();
 const path = require("node:path");
 const indexRouter = require("./routes/indexRouter");
 const signUpRouter = require("./routes/signUpRouter");
+const logInRouter = require("./routes/logInRouter");
+const sessionConfig = require("./auth/sessionConfig");
+const passport = require("passport");
+require("./auth/passportConfig");
 
 
 //Middleware
@@ -11,15 +15,18 @@ app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
-
-
-
+app.use(sessionConfig);
+app.use(passport.session());
+app.use((req, res, next) => {
+    res.locals.currentUser = req.user;
+    next();
+});
 
 
 // Routes
 app.use("/", indexRouter);
 app.use("/sign-up", signUpRouter);
-
+app.use("/log-in", logInRouter);
 
 
 // Connecting to server

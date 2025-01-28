@@ -1,55 +1,64 @@
 const { body, validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
 const asyncHandler = require("express-async-handler");
-const db = require("../db/queries")
+const db = require("../db/queries");
 
 const getSignUpPage = (req, res) => {
-    res.render("signUp", {title: "Signing Up"});
-}
+  res.render("signUp", { title: "Signing Up" });
+};
 
 const validateUser = [
-    body("username")
+  body("username")
     .trim()
     .isLength({ min: 1 })
     .withMessage(`Username is required`)
-    .custom(value => {return !(value.includes(" "))})
+    .custom((value) => {
+      return !value.includes(" ");
+    })
     .withMessage(`Username cannot have spaces`),
-    body("password")
+  body("password")
     .trim()
     .isLength({ min: 6 })
     .withMessage(`Password must be at least 6 characters long`),
 ];
 
 const signUpUser = [
-    validateUser,
-    asyncHandler(async (req, res) => {
+  validateUser,
+  asyncHandler(async (req, res, next) => {
+    const errorArray = validationResult(req).array();
+    if (req.body.password !== req.body.password2) {
+      errorArray.push({ msg: "Password did not match" });
+    }
+    const user = await db.findUser(req.body.username);
+    if (user) {
+      errorArray.push({
+        msg: `Username "${req.body.username}" already exists`,
+      });
+    }
 
-        const errorArray = validationResult(req).array();
-        if (req.body.password !== req.body.password2) {
-            errorArray.push({msg: "Password did not match"});
+    if (errorArray.length > 0) {
+      return res.status(400).render("signUp", {
+        title: "Signing Up",
+        errors: errorArray,
+      });
+    }
+
+    try {
+      const hashedPassword = await bcrypt.hash(req.body.password, 10);
+      const newUser = await db.addUser(req.body.username, hashedPassword);
+      req.login(newUser, (err) => {
+        if (err) {
+          return next(err);
         }
-        const usernameExists = await db.checkIfUsernameExists(req.body.username);
-        if (usernameExists) {
-            errorArray.push({msg: `Username "${req.body.username}" already exists`});
-        }
-
-        if (errorArray.length > 0) {
-            return res.status(400).render("signUp", {
-                title: "Signing Up",
-                errors: errorArray
-            });
-        }
-
-        bcrypt.hash(req.body.password, 10, async (err, hashedPassword) => {
-            if (err) throw err;
-            else await db.addUser(req.body.username, hashedPassword);
-        })
-
-        res.redirect("/");
-    })
-]
+        return res.redirect("/");
+      });
+    } catch (err) {
+      next(err);
+    }
+  }),
+];
 
 module.exports = {
-    getSignUpPage,
-    signUpUser
-}
+  getSignUpPage,
+  signUpUser,
+};

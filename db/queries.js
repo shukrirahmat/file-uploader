@@ -2,16 +2,24 @@ const { PrismaClient } = require("@prisma/client");
 
 const prisma = new PrismaClient();
 
-async function checkIfUsernameExists(username) {
+async function findUser(username) {
   const user = await prisma.user.findUnique({
     where: {
       username,
     },
   });
 
-  const exist = !!user;
+  return user;
+}
 
-  return exist;
+async function findUserWithID(id) {
+  const user = await prisma.user.findUnique({
+    where: {
+      id,
+    },
+  });
+
+  return user;
 }
 
 async function addUser(username, hashedPassword) {
@@ -21,9 +29,12 @@ async function addUser(username, hashedPassword) {
       password: hashedPassword,
     },
   });
+
+  return user;
 }
 
 module.exports = {
-  checkIfUsernameExists,
+  findUser,
+  findUserWithID,
   addUser,
 };
