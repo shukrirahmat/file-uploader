@@ -1,7 +1,7 @@
 const { Router } = require("express");
 const router = Router();
 const signUpController = require("../controllers/signUpController");
-const checkLoggedIn = require("../controllers/checkLoggedIn");
+const checkLoggedIn = require("../auth/checkLoggedIn");
 
 router.get("/", checkLoggedIn, signUpController.getSignUpPage);
 router.post("/", signUpController.signUpUser);

@@ -1,13 +1,11 @@
 const express = require("express")
 const app = express();
 const path = require("node:path");
-
 const indexRouter = require("./routes/indexRouter");
 const signUpRouter = require("./routes/signUpRouter");
 const logInRouter = require("./routes/logInRouter");
 const logOutRouter = require("./routes/logOutRouter");
-
-
+const uploadRouter = require("./routes/uploadRouter");
 const sessionConfig = require("./auth/sessionConfig");
 const passport = require("passport");
 
@@ -20,6 +18,7 @@ app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 app.use(sessionConfig);
+
 require("./auth/passportConfig");
 app.use(passport.session());
 app.use((req, res, next) => {
@@ -33,6 +32,7 @@ app.use("/", indexRouter);
 app.use("/sign-up", signUpRouter);
 app.use("/log-in", logInRouter);
 app.use("/log-out", logOutRouter);
+app.use("/upload", uploadRouter);
 
 
 // Connecting to server

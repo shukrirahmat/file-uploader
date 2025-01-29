@@ -11,7 +11,8 @@
 <body>
   <% if (locals.currentUser) { %>
   <div class="header">
-    <h1>FILE UPLOADER</h1>
+    <a href="/"><h1>FILE UPLOADER</h1></a>
+    <a href="/upload">UPLOAD FILE</a>
     <a href="/log-out">LOG OUT</a>
   </div>
   <div class="main">WELCOME!, <%=currentUser.username %></div>
@@ -20,7 +21,7 @@
 
   <% } else { %>
   <div class="header">
-    <h1>FILE UPLOADER</h1>
+    <a href="/"><h1>FILE UPLOADER</h1></a>
     <a href="/log-in">LOG IN</a>
     <a href="/sign-up">SIGN UP</a>
   </div>
