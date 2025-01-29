@@ -1,10 +1,10 @@
 const passport = require("passport");
 
 const getLoginPage = (req, res) => {
-  const errorMessage = req.session.messages;
-  req.session.messages = undefined;
-
-  res.render("login", { title: "Log In", errors: errorMessage});
+  req.session.reload(() => {
+    res.render("login", { title: "Log In", errors: req.session.messages });
+    req.session.messages = undefined;
+  });
 };
 
 const loginUser = passport.authenticate("local", {

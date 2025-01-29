@@ -10,7 +10,7 @@ const logOutRouter = require("./routes/logOutRouter");
 
 const sessionConfig = require("./auth/sessionConfig");
 const passport = require("passport");
-require("./auth/passportConfig");
+
 
 
 //Middleware
@@ -20,6 +20,7 @@ app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 app.use(sessionConfig);
+require("./auth/passportConfig");
 app.use(passport.session());
 app.use((req, res, next) => {
     res.locals.currentUser = req.user;
