@@ -33,8 +33,43 @@ async function addUser(username, hashedPassword) {
   return user;
 }
 
+async function checkIfFolderExists(userId, name) {
+  const folder = await prisma.folder.findUnique({
+    where: {
+      name,
+      userId
+    }
+  })
+
+  return !!folder;
+}
+
+async function createNewFolder(userId, name) {
+  const folder = await prisma.folder.create({
+    data: {
+      name,
+      userId
+    }
+  })
+
+  return folder;
+}
+
+async function getAllFolders(userId) {
+  const folders = await prisma.folder.findMany({
+    where: {
+      userId
+    }
+  })
+
+  return folders;
+}
+
 module.exports = {
   findUser,
   findUserWithID,
   addUser,
+  checkIfFolderExists,
+  createNewFolder,
+  getAllFolders
 };

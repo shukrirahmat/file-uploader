@@ -11,17 +11,43 @@
 <body>
   <% if (locals.currentUser) { %>
   <div class="header">
-    <a href="/"><h1>FILE UPLOADER</h1></a>
+    <a href="/">
+      <h1>FILE UPLOADER</h1>
+    </a>
     <a href="/upload">UPLOAD FILE</a>
     <a href="/log-out">LOG OUT</a>
   </div>
-  <div class="main">WELCOME!, <%=currentUser.username %></div>
+  <div class="main">
+    <h2>WELCOME!, <%=currentUser.username %></h2>
+
+    <form action="/folder/new" method="post">
+      <p>CREATE NEW FOLDER</p>
+      
+      <input type="text" name="folderName" placeholder="Enter folder name...">
+      <%- include("partials/folderNameError.ejs") %>
+      
+      <button>CREATE</button>
+    </form>
+
+    <hr>
+
+    <h2>YOUR FOLDERS</h2>
+
+    <% locals.folders.forEach((folder) => { %>
+      <ul>
+        <li><%=folder.name %></li>
+      </ul>
+    <% }) %>
+
+  </div>
   <div class="footer"></div>
 
 
   <% } else { %>
   <div class="header">
-    <a href="/"><h1>FILE UPLOADER</h1></a>
+    <a href="/">
+      <h1>FILE UPLOADER</h1>
+    </a>
     <a href="/log-in">LOG IN</a>
     <a href="/sign-up">SIGN UP</a>
   </div>
