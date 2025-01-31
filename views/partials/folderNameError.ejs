@@ -1,3 +1,7 @@
-<% if (locals.folderNameError) {%>
-<p><%= folderNameError %></p>
+<% if (locals.errors) {%>
+<ul>
+  <% errors.forEach((error) => { %>
+  <li><%= error.msg %></li>
+  <% }); %>
+</ul>
 <% } %>

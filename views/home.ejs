@@ -14,7 +14,6 @@
     <a href="/">
       <h1>FILE UPLOADER</h1>
     </a>
-    <a href="/upload">UPLOAD FILE</a>
     <a href="/log-out">LOG OUT</a>
   </div>
   <div class="main">
@@ -36,6 +35,10 @@
     <% locals.folders.forEach((folder) => { %>
       <ul>
         <li><%=folder.name %></li>
+        <form action="/folder" method="post">
+          <input type="hidden" name="folderId" value="<%=folder.id%>">
+          <button>VIEW</button>
+        </form>
       </ul>
     <% }) %>
 
