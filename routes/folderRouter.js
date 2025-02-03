@@ -1,8 +1,9 @@
 const {Router} = require("express");
 const router = Router();
 const folderController = require("../controllers/folderController");
+const checkAuthenticated = require("../auth/checkAuthenticated")
 
-router.post("/", folderController.getFolderPage);
+router.get("/", checkAuthenticated, folderController.getFolderPage);
 router.post("/new", folderController.createNewFolder);
 
 module.exports = router;

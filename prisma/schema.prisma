@@ -21,15 +21,32 @@ model Session {
 }
 
 model User {
-  id       Int      @id @default(autoincrement())
+  id       String   @id @default(uuid())
   username String   @unique
   password String
   Folder   Folder[]
+  File     File[]
 }
 
 model Folder {
-  id    Int    @id @default(autoincrement())
-  name  String @unique
-  owner User   @relation(fields: [userId], references: [id])
-  userId Int
+  id     String @id @default(uuid())
+  name   String
+  owner  User   @relation(fields: [userId], references: [id])
+  userId String
+  files  File[]
+
+  @@unique([userId, name])
+}
+
+model File {
+  id         String   @id @default(uuid())
+  name       String
+  size       BigInt
+  uploadedAt DateTime
+  Folder     Folder   @relation(fields: [folderId], references: [id])
+  folderId   String
+  owner      User     @relation(fields: [userId], references: [id])
+  userId     String
+
+  @@unique([folderId, name])
 }

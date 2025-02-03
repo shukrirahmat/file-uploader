@@ -34,10 +34,10 @@ async function addUser(username, hashedPassword) {
 }
 
 async function checkIfFolderExists(userId, name) {
-  const folder = await prisma.folder.findUnique({
+  const folder = await prisma.folder.findFirst({
     where: {
-      name,
-      userId
+      userId,
+      name
     }
   })
 
@@ -69,10 +69,37 @@ async function getFolderFromId(folderId) {
   const folder = await prisma.folder.findUnique({
     where: {
       id: folderId
+    },
+    include: {
+      files: true
     }
   })
   
   return folder;
+}
+
+async function createFileData(name, size, uploadedAt, folderId, userId) {
+  const file = await prisma.file.create({
+    data: {
+      name,
+      size,
+      uploadedAt,
+      folderId,
+      userId
+    }
+  })
+
+  return file;
+}
+
+async function getFileFromId(id) {
+  const file = await prisma.file.findUnique({
+    where: {
+      id
+    }
+  })
+
+  return file;
 }
 
 module.exports = {
@@ -82,5 +109,7 @@ module.exports = {
   checkIfFolderExists,
   createNewFolder,
   getAllFolders,
-  getFolderFromId
+  getFolderFromId,
+  createFileData,
+  getFileFromId
 };

@@ -5,7 +5,7 @@ const indexRouter = require("./routes/indexRouter");
 const signUpRouter = require("./routes/signUpRouter");
 const logInRouter = require("./routes/logInRouter");
 const logOutRouter = require("./routes/logOutRouter");
-const uploadRouter = require("./routes/uploadRouter");
+const fileRouter = require("./routes/fileRouter");
 const folderRouter = require("./routes/folderRouter");
 const sessionConfig = require("./auth/sessionConfig");
 const passport = require("passport");
@@ -33,7 +33,7 @@ app.use("/", indexRouter);
 app.use("/sign-up", signUpRouter);
 app.use("/log-in", logInRouter);
 app.use("/log-out", logOutRouter);
-app.use("/upload", uploadRouter);
+app.use("/file", fileRouter);
 app.use("/folder", folderRouter);
 
 

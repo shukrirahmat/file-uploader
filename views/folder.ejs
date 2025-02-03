@@ -10,11 +10,27 @@
 
 <body>
   <div class="header">
-    <a href="/"><h1>FILE UPLOADER</h1></a>
+    <a href="/">
+      <h1>FILE UPLOADER</h1>
+    </a>
   </div>
   <div class="main">
     <h2><%=title %></h2>
-    <a href="/upload">UPLOAD FILE</a>
+    <form action="/file/new" method="post" enctype="multipart/form-data">
+      <input type="file" name="uploaded_file">
+      <input type="hidden" name="folderId" value="<%=folder.id%>">
+      <button>UPLOAD A FILE</button>
+    </form>
+
+    <hr>
+    <h2>FILES</h2>
+
+    <% locals.folder.files.forEach((file) => { %>
+    <div>
+      <p><%=file.name %></p>
+      <a href="/file?id=<%=file.id%>">VIEW</a>
+    </div>
+    <%}) %>
   </div>
   <div class="footer"></div>
 </body>

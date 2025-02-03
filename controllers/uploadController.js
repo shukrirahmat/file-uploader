@@ -3,6 +3,9 @@ const getUploadForm = (req, res) => {
 };
 
 const uploadSuccess = (req, res) => {
+  console.log(req.file.originalname)
+  console.log(req.file.size);
+
   res.render("uploadSuccess", { title: "Upload Successful" } )
 }
 

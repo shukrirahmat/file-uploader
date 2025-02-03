@@ -35,10 +35,7 @@
     <% locals.folders.forEach((folder) => { %>
       <ul>
         <li><%=folder.name %></li>
-        <form action="/folder" method="post">
-          <input type="hidden" name="folderId" value="<%=folder.id%>">
-          <button>VIEW</button>
-        </form>
+        <a href="/folder?id=<%=folder.id%>">VIEW</a>
       </ul>
     <% }) %>
 
