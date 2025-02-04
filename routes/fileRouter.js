@@ -1,6 +1,6 @@
 const {Router} = require("express");
 const router = Router();
-const upload = require("../multer/config");
+const upload = require("../storage/multerConfig");
 const fileController = require("../controllers/fileController");
 const checkAuthenticated = require("../auth/checkAuthenticated")
 
