@@ -5,6 +5,7 @@ const fileController = require("../controllers/fileController");
 const checkAuthenticated = require("../auth/checkAuthenticated")
 
 router.get("/",checkAuthenticated, fileController.viewFile);
-router.post("/new", upload.single('uploaded_file'), fileController.uploadtoCloud);
+router.post("/upload", upload.single('uploaded_file'), fileController.uploadtoCloud);
+router.get("/download", fileController.downloadFile);
 
 module.exports = router;

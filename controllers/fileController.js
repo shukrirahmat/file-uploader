@@ -27,7 +27,18 @@ const uploadtoCloud = asyncHandler(async (req, res) => {
     res.redirect(`/folder?id=${req.body.folderId}`)
 })
 
+const downloadFile = asyncHandler(async (req, res) => {
+    const file = await db.getFileFromId(req.query.id);
+
+    if (!file || req.user.id !== file.userId ) {
+        throw new PageNotFoundError("The requested file cannot be found");
+    }
+
+    res.redirect(file.url);
+})
+
 module.exports = {
     uploadtoCloud,
-    viewFile
+    viewFile,
+    downloadFile
 }
