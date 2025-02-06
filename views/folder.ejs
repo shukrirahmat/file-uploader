@@ -23,6 +23,10 @@
       <input type="file" name="uploaded_file">
       <input type="hidden" name="folderId" value="<%=folder.id%>">
       <button>UPLOAD A FILE</button>
+      
+      <% if (locals.errorMsg) { %>
+        <p><%=errorMsg%></p>
+      <% } %>
     </form>
 
     <hr>

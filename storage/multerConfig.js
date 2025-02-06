@@ -9,17 +9,17 @@ const storage = multer.diskStorage({
     cb(null, location);
   },
   filename: function (req, file, cb) {
-    let uploadName = file.originalname;
     const n = file.originalname.split(".");
-    let i = 1;
-    while (fs.existsSync(path.join(location, uploadName))) {
-      uploadName = n[0] + "(" + i + ")" + n[1];
-      i++;
-    }
+    const uploadName = n[0] + "-" + Date.now() + "." + n[1];
     cb(null, uploadName);
   },
 });
 
-const upload = multer({ storage });
+const upload = multer({
+  storage,
+  limits: {
+    fileSize: 5 * 1024 * 1024,
+  },
+});
 
 module.exports = upload;

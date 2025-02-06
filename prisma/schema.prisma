@@ -47,6 +47,7 @@ model File {
   folderId   String
   owner      User     @relation(fields: [userId], references: [id])
   userId     String
+  url        String
 
   @@unique([folderId, name])
 }
