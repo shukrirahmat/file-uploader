@@ -15,15 +15,16 @@ const viewFile = asyncHandler(async (req, res) => {
 
 const uploadtoCloud = asyncHandler(async (req, res) => {
 
+    const folder = await db.getFolderFromId(req.body.folderId);
+
     if (!req.file) {
-        const folder = await db.getFolderFromId(req.body.folderId);
         return res.status(400).render("folder", {title: folder.name, folder, errorMsg: "No file to upload"});
     }
 
-    const {data, error} = await supabase.storage.from('odin_file_uploader').upload(req.file.path, req.file)
+    const {data, error} = await supabase.storage.from('odin_file_uploader').upload(`/${req.body.userName}/${folder.name}/${req.file.originalname}`, req.file.buffer, {contentType: req.file.mimetype})
     if (error) throw error;
-    const url = supabase.storage.from('odin_file_uploader').getPublicUrl(data.path, {download: true});
-    const file = await db.createFileData(req.file.filename, req.file.size, new Date(), req.body.folderId, req.user.id, url.data.publicUrl);
+    const url = supabase.storage.from('odin_file_uploader').getPublicUrl("/" + data.path, {download: true});
+    const file = await db.createFileData(req.file.originalname, req.file.size, new Date(), req.body.folderId, req.user.id, url.data.publicUrl);
     res.redirect(`/folder?id=${req.body.folderId}`)
 })
 

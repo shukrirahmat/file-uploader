@@ -22,6 +22,7 @@
     <form action="/file/upload" method="post" enctype="multipart/form-data">
       <input type="file" name="uploaded_file">
       <input type="hidden" name="folderId" value="<%=folder.id%>">
+      <input type="hidden" name="userName" value="<%=locals.currentUser.username%>">
       <button>UPLOAD A FILE</button>
       
       <% if (locals.errorMsg) { %>
