@@ -35,7 +35,7 @@ const createNewFolder = [
   }),
 ];
 
-const getFolderPage = async (req, res) => {
+const getFolderPage = asyncHandler(async (req, res) => {
   const folderId = req.query.id
   const folder = await db.getFolderFromId(folderId);
  
@@ -44,7 +44,7 @@ const getFolderPage = async (req, res) => {
   }
 
   res.render("folder", {title: folder.name, folder});
-}
+})
 
 module.exports = {
   createNewFolder,
