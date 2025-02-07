@@ -103,6 +103,17 @@ async function getFileFromId(id) {
   return file;
 }
 
+async function checkIfFileExists(filename, folderId) {
+  const exist = await prisma.file.findFirst({
+    where: {
+      name: filename,
+      folderId,
+    }
+  })
+
+  return !!exist;
+}
+
 module.exports = {
   findUser,
   findUserWithID,
@@ -112,5 +123,6 @@ module.exports = {
   getAllFolders,
   getFolderFromId,
   createFileData,
-  getFileFromId
+  getFileFromId,
+  checkIfFileExists
 };

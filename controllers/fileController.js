@@ -21,6 +21,11 @@ const uploadtoCloud = asyncHandler(async (req, res) => {
         return res.status(400).render("folder", {title: folder.name, folder, errorMsg: "No file to upload"});
     }
 
+    const fileAlreadyExist = await db.checkIfFileExists(req.file.originalname, folder.id);
+    if (fileAlreadyExist) {
+        return res.status(400).render("folder", {title: folder.name, folder, errorMsg: "File with that name already exist please rename the file before uploading"});
+    }
+
     const {data, error} = await supabase.storage.from('odin_file_uploader').upload(`/${req.body.userName}/${folder.name}/${req.file.originalname}`, req.file.buffer, {contentType: req.file.mimetype})
     if (error) throw error;
     const url = supabase.storage.from('odin_file_uploader').getPublicUrl("/" + data.path, {download: true});
