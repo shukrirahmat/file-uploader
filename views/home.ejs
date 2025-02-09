@@ -9,22 +9,18 @@
 </head>
 
 <body>
+
   <% if (locals.currentUser) { %>
-  <div class="header">
-    <a href="/">
-      <h1>FILE UPLOADER</h1>
-    </a>
-    <a href="/log-out">LOG OUT</a>
-  </div>
+  <%- include("partials/header.ejs") %>
   <div class="main">
     <h2>WELCOME!, <%=currentUser.username %></h2>
 
     <form action="/folder/new" method="post">
       <p>CREATE NEW FOLDER</p>
-      
+
       <input type="text" name="folderName" placeholder="Enter folder name...">
       <%- include("partials/folderNameError.ejs") %>
-      
+
       <button>CREATE</button>
     </form>
 
@@ -33,26 +29,23 @@
     <h2>YOUR FOLDERS</h2>
 
     <% locals.folders.forEach((folder) => { %>
-      <ul>
-        <li><%=folder.name %></li>
-        <a href="/folder?id=<%=folder.id%>">VIEW</a>
-      </ul>
+    <ul>
+      <li><%=folder.name %></li>
+      <a href="/folder?id=<%=folder.id%>">VIEW</a>
+    </ul>
     <% }) %>
 
   </div>
-  <div class="footer"></div>
+  <%- include("partials/footer.ejs") %>
 
 
   <% } else { %>
-  <div class="header">
-    <a href="/">
-      <h1>FILE UPLOADER</h1>
-    </a>
+  <%- include("partials/header.ejs") %>
+  <div class="main">
     <a href="/log-in">LOG IN</a>
     <a href="/sign-up">SIGN UP</a>
   </div>
-  <div class="main">YOU ARE IN THE HOMEPAGE. Please sign up or log-in</div>
-  <div class="footer"></div>
+  <%- include("partials/footer.ejs") %>
   <% } %>
 
 </body>

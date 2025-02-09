@@ -9,9 +9,7 @@
 </head>
 
 <body>
-  <div class="header">
-    <a href="/"><h1>FILE UPLOADER</h1></a>
-  </div>
+  <%- include("partials/header.ejs") %>
   <div class="main">
     <form action="/sign-up" method="post">
       <%- include("partials/signUpErrors.ejs") %>
@@ -30,7 +28,7 @@
       <button>Sign Up</button>
     </form>
   </div>
-  <div class="footer"></div>
+  <%- include("partials/footer.ejs") %>
 </body>
 
 </html>

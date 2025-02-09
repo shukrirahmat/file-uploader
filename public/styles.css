@@ -1,20 +1,82 @@
+@font-face {
+  font-family: "LexendDeca";
+  src: url(fonts/LexendDeca-Regular.ttf), url(fonts/LexendDeca-Bold.ttf);
+}
+
+@font-face {
+  font-family: "RammettoOne";
+  src: url(fonts/RammettoOne-Regular.ttf);
+}
+
 * {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 
 body {
-    padding: 0;
-    margin: 0;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
+
+/* HEADER */
 
 .header {
-    background-color: black;
-    color: white;
+  background-color: rgb(15, 45, 90);
+  color: white;
+  height: 100px;
+  padding: 20px 50px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 }
 
+.header .logo {
+  font-family: "RammettoOne", sans-serif;
+}
+
+.header .logo a {
+  color: rgb(250, 250, 100);
+  text-decoration: none;
+}
+
+.header .logoutBtn {
+  font-family: "LexendDeca", sans-serif;
+  font-weight: bold;
+  border: 1px solid rgb(250, 250, 100);
+  padding: 5px 10px;
+  border-radius: 10px;
+  color: rgb(250, 250, 100);
+  text-decoration: none;
+}
+
+.header .logoutBtn:hover {
+  cursor: pointer;
+  background-color: rgb(250, 250, 100);
+  color: rgb(15, 45, 90);
+}
+
+/* MAIN */
+
+.main {
+  flex: 1;
+  background-color: rgb(213, 222, 223);
+}
+
+/* FOOTER */
+
 .footer {
-    background-color: black;
-    color: white;
+  font-family: "LexendDeca", sans-serif;
+  background-color: rgb(15, 45, 90);
+  color: rgb(250, 250, 100);
+  height: 30px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
 }
