@@ -1,4 +1,4 @@
-const express = require("express")
+const express = require("express");
 const app = express();
 const path = require("node:path");
 const indexRouter = require("./routes/indexRouter");
@@ -9,8 +9,6 @@ const fileRouter = require("./routes/fileRouter");
 const folderRouter = require("./routes/folderRouter");
 const sessionConfig = require("./auth/sessionConfig");
 const passport = require("passport");
-
-
 
 //Middleware
 
@@ -23,10 +21,9 @@ app.use(sessionConfig);
 require("./auth/passportConfig");
 app.use(passport.session());
 app.use((req, res, next) => {
-    res.locals.currentUser = req.user;
-    next();
+  res.locals.currentUser = req.user;
+  next();
 });
-
 
 // Routes
 app.use("/", indexRouter);
@@ -36,10 +33,23 @@ app.use("/log-out", logOutRouter);
 app.use("/file", fileRouter);
 app.use("/folder", folderRouter);
 
+//Error
+const PageNotFoundError = require("./errors/PageNotFoundError");
+app.use((req, res, next) => {
+  throw new PageNotFoundError("The requested page could not be found");
+});
+app.use((err, req, res, next) => {
+  res
+    .status(err.statusCode || 500)
+    .render("errorPage", {
+      title: "Error",
+      error: err.message,
+      code: err.statusCode || 500,
+    });
+});
 
 // Connecting to server
-const PORT = process.env.PORT || 8000
+const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => {
-    console.log(`Listening to port ${PORT}...`)
-})
-
+  console.log(`Listening to port ${PORT}...`);
+});
