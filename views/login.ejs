@@ -11,17 +11,18 @@
 <body>
   <%- include("partials/header.ejs") %>
   <div class="main">
-    <form action="/log-in" method="post">
-      <%- include("partials/logInErrors.ejs") %>
+    <form class="logInForm" action="/log-in" method="post">
+      
       <div>
-        <label for="username">Username</label>
+        <label for="username">USERNAME</label>
         <input type="text" id="username" name="username">
       </div>
       <div>
-        <label for="password">Password</label>
+        <label for="password">PASSWORD</label>
         <input type="password" id="password" name="password">
+        <%- include("partials/logInErrors.ejs") %>
       </div>
-      <button>Log In</button>
+      <button>LOG IN</button>
     </form>
   </div>
   <%- include("partials/footer.ejs") %>

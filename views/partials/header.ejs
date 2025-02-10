@@ -1,6 +1,13 @@
 <div class="header">    
     <h1 class="logo"><a href="/">UPLOADER</a></h1>
     <% if (locals.currentUser) { %>
-        <a class="logoutBtn" href="/log-out">LOG OUT</a>
+        <div class="nav">
+            <a href="/log-out">LOG OUT</a>
+        </div>
+    <% } else { %>
+        <div class="nav">
+            <a href="/log-in">LOG IN</a>
+            <a href="/sign-up">SIGN UP</a>
+        </div>
     <% } %>
 </div>

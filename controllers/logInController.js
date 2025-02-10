@@ -2,8 +2,9 @@ const passport = require("passport");
 
 const getLoginPage = (req, res) => {
   req.session.reload(() => {
-    res.render("login", { title: "Log In", errors: req.session.messages });
+    const errors = req.session.messages;
     req.session.messages = undefined;
+    res.render("login", { title: "Log In", errors });
   });
 };
 

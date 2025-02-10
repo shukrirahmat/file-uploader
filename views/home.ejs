@@ -42,8 +42,9 @@
   <% } else { %>
   <%- include("partials/header.ejs") %>
   <div class="main">
-    <a href="/log-in">LOG IN</a>
-    <a href="/sign-up">SIGN UP</a>
+    <div class="notLogged">
+      Log in or Sign Up to start uploading your files.
+    </div>
   </div>
   <%- include("partials/footer.ejs") %>
   <% } %>
