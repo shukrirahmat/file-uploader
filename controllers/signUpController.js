@@ -12,10 +12,8 @@ const validateUser = [
     .trim()
     .isLength({ min: 1 })
     .withMessage(`Username is required`)
-    .custom((value) => {
-      return !value.includes(" ");
-    })
-    .withMessage(`Username cannot have spaces`),
+    .matches(/^[a-zA-Z][a-zA-Z0-9_]+$/)
+    .withMessage(`Username is not valid`),
   body("password")
     .trim()
     .isLength({ min: 6 })

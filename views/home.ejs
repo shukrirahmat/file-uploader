@@ -13,28 +13,32 @@
   <% if (locals.currentUser) { %>
   <%- include("partials/header.ejs") %>
   <div class="main">
-    <h2>WELCOME!, <%=currentUser.username %></h2>
+    <div class="dashboard">
+      <h2 class="welcome">Welcome, <%=currentUser.username %></h2>
 
-    <form action="/folder/new" method="post">
-      <p>CREATE NEW FOLDER</p>
+      <form class="newfolder" action="/folder/new" method="post">
+        <h3>Create new folder</h3>
 
-      <input type="text" name="folderName" placeholder="Enter folder name...">
-      <%- include("partials/folderNameError.ejs") %>
+        <div>
+          <input type="text" name="folderName" placeholder="Enter folder name...">
+          <button>CREATE</button>
+          <%- include("partials/folderNameError.ejs") %>
 
-      <button>CREATE</button>
-    </form>
+        </div>
+      </form>
 
-    <hr>
+      <div class="folderList">
+        <h3>Your Folders</h3>
 
-    <h2>YOUR FOLDERS</h2>
-
-    <% locals.folders.forEach((folder) => { %>
-    <ul>
-      <li><%=folder.name %></li>
-      <a href="/folder?id=<%=folder.id%>">VIEW</a>
-    </ul>
-    <% }) %>
-
+        <div class="folderContainer">
+          <% locals.folders.forEach((folder) => { %>
+          <li class="folder">
+            <a href="/folder?id=<%=folder.id%>"><img src="/images/folder-alt-svgrepo-com.svg"><%=folder.name %></a>
+          </li>
+          <% }) %>
+        </div>
+      </div>
+    </div>
   </div>
   <%- include("partials/footer.ejs") %>
 
@@ -43,7 +47,12 @@
   <%- include("partials/header.ejs") %>
   <div class="main">
     <div class="notLogged">
-      Log in or Sign Up to start uploading your files.
+      <div class="quoteContainer">
+        <p class="quote">“Take care of all your memories. For you cannot relieve them.”</p>
+        <p class="quoter">- Bob Dylan</p>
+      </div>
+      <div class="photoref">Photo by <a href="https://unsplash.com/@sarandywestfall_photo?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">sarandy westfall</a> on <a href="https://unsplash.com/photos/several-portraits-on-top-of-white-textile-qqd8APhaOg4?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+      </div>
     </div>
   </div>
   <%- include("partials/footer.ejs") %>

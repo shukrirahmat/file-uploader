@@ -11,21 +11,21 @@
 <body>
   <%- include("partials/header.ejs") %>
   <div class="main">
-    <form action="/sign-up" method="post">
+    <form class="signUpForm" action="/sign-up" method="post">
       <%- include("partials/signUpErrors.ejs") %>
       <div>
-        <label for="username">Username</label>
+        <label for="username">USERNAME <span>(Only letters, numbers and underscores)</span></label>
         <input type="text" id="username" name="username">
       </div>
       <div>
-        <label for="password">Password</label>
+        <label for="password">PASSWORD <span>(6 characters minimum)</span></label>
         <input type="password" id="password" name="password">
       </div>
       <div>
-        <label for="password2">Confirm Password</label>
+        <label for="password2">CONFIRM PASSWORD</label>
         <input type="password" id="password2" name="password2">
       </div>
-      <button>Sign Up</button>
+      <button>SIGN UP</button>
     </form>
   </div>
   <%- include("partials/footer.ejs") %>
