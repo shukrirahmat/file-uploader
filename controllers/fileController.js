@@ -23,7 +23,7 @@ const uploadtoCloud = asyncHandler(async (req, res) => {
 
     const fileAlreadyExist = await db.checkIfFileExists(req.file.originalname, folder.id);
     if (fileAlreadyExist) {
-        return res.status(400).render("folder", {title: folder.name, folder, errorMsg: "File with that name already exist please rename the file before uploading"});
+        return res.status(400).render("folder", {title: folder.name, folder, errorMsg: "File with that name already exists"});
     }
 
     if (req.file.size > 5 * 1024 * 1024) {

@@ -11,30 +11,42 @@
 <body>
   <%- include("partials/header.ejs") %>
   <div class="main">
-    <h2><%=title %></h2>
+    <div class="folderPage">
 
-    <hr>
-    <p>Upload new file</p>
-    <form action="/file/upload" method="post" enctype="multipart/form-data">
-      <input type="file" name="uploaded_file">
-      <input type="hidden" name="folderId" value="<%=folder.id%>">
-      <input type="hidden" name="userName" value="<%=locals.currentUser.username%>">
-      <button>UPLOAD A FILE</button>
-      
-      <% if (locals.errorMsg) { %>
-        <p><%=errorMsg%></p>
-      <% } %>
-    </form>
 
-    <hr>
-    <h2>FILES</h2>
+      <form class="fileUpload" action="/file/upload" method="post" enctype="multipart/form-data">
+        <h3>Upload to "<%=title %>"</h3>
+        <hr>
+        <div>
+          <input type="file" name="uploaded_file">
+          <input type="hidden" name="folderId" value="<%=folder.id%>">
+          <input type="hidden" name="userName" value="<%=locals.currentUser.username%>">
+          <button>UPLOAD</button>
 
-    <% locals.folder.files.forEach((file) => { %>
-    <div>
-      <p><%=file.name %></p>
-      <a href="/file?id=<%=file.id%>">VIEW</a>
+          <% if (locals.errorMsg) { %>
+          <li class="uploadError"><%=errorMsg%></li>
+          <% } %>
+        </div>
+      </form>
+
+      <div class="currentFolder">
+        <div class="folderHead"><img src="/images/folder-alt-svgrepo-com.svg">
+          <h3><%=title%></h3>
+        </div>
+
+        <div>
+          <% if (locals.folder.files.length < 1) { %>
+          <p>The folder is empty</p>
+          <% } else { %>
+          <% locals.folder.files.forEach((file) => { %>
+          <div>
+            <p><%=file.name %></p>
+            <a href="/file?id=<%=file.id%>">VIEW</a>
+          </div>
+          <%}) }%>
+        </div>
+      </div>
     </div>
-    <%}) %>
   </div>
   <%- include("partials/footer.ejs") %>
 </body>

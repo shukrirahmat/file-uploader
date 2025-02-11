@@ -201,7 +201,6 @@ body {
   bottom: -20px;
   left: 20px;
   font-size: 13px;
-
 }
 
 .main .dashboard .folderList {
@@ -245,6 +244,7 @@ body {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  font-family: "Lexend", sans-serif;
 }
 
 .main .dashboard .folderList img {
@@ -254,6 +254,118 @@ body {
   position: absolute;
   left: 20px;
   bottom: 23%;
+}
+
+.main .dashboard hr {
+  margin-top: -5px;
+  margin-bottom: 10px;
+}
+
+/* FOLDER PAGE */
+
+.main .folderPage {
+  font-family: "Lexend", sans-serif;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.main .folderPage .fileUpload {
+  background-color: white;
+  padding: 20px 20px 30px 20px;
+  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.main .folderPage .fileUpload h3 {
+  font-family: "Lexend", sans-serif;
+  color: rgb(20, 55, 88);
+  font-size: 22px;
+}
+
+.main .folderPage .fileUpload > div {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap:10px;
+  position: relative;
+}
+
+.main .folderPage .fileUpload input {
+  font-family: "Lexend", sans-serif;
+  font-weight: 300;
+  font-size: 16px;
+  width: 300px;
+}
+
+.main .folderPage .fileUpload input::-webkit-file-upload-button {
+  font-family: "Lexend", sans-serif;
+  font-weight: 300;
+}
+
+.main .folderPage .fileUpload button {
+  font-family: "Lexend", sans-serif;
+  font-weight: bold;
+  font-size: 14px;
+  padding: 4px 10px;
+  background-color: rgb(20, 55, 88);
+  color:  rgb(215, 225, 225);
+  border: none;
+}
+
+.main .folderPage .fileUpload button:hover {
+  cursor: pointer;
+  background-color: rgb(5, 40, 73);
+}
+
+.main .folderPage .fileUpload .uploadError {
+  font-family: "Lexend", sans-serif;
+  font-weight: 300;
+  position: absolute;
+  bottom: -20px;
+  left: 5px;
+  font-size: 13px;
+}
+
+.main .folderPage hr {
+  margin-top: -5px;
+  margin-bottom: 10px;
+}
+
+.main .folderPage .currentFolder {
+  background-color: white;
+  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.main .folderPage .currentFolder .folderHead{
+  background-color: rgb(20, 55, 88);
+  color:  rgb(215, 225, 225);
+  padding: 10px 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+
+.main .folderPage .currentFolder .folderHead h3{
+  font-weight: normal;
+}
+
+.main .folderPage .currentFolder .folderHead img{
+  width: 25px;
+  height: auto;
+  filter: invert(1);
+}
+
+.main .folderPage .currentFolder > div {
+  padding: 20px;
 }
 
 /* LOG-IN PAGE */
