@@ -42,9 +42,10 @@
             <thead>
               <tr>
                 <th scope="col">Name</th>
-                <th scope="col">Size (kb)</th>
+                <th scope="col">Size (KB)</th>
                 <th scope="col">Date Uploaded</th>
                 <th scope="col">Link</th>
+                <th scope="col"></th>
               </tr>
             </thead>
             <tbody>
@@ -54,6 +55,10 @@
                 <td><%=parseFloat(file.size/1024).toFixed(1)%></td>
                 <td><%=file.uploadedAt.toISOString().substring(0, 10)%></td>
                 <td><a href="/file/download?id=<%=file.id%>">DOWNLOAD</a></td>
+                <td><form action="/file/delete" method="post">
+                  <input type="hidden" name="deleteId" value="<%=file.id%>">
+                  <button class="fileDeleteBtn">DELETE</button>
+                </form></td>
               </tr>
               <%}) %>
             </tbody>

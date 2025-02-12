@@ -78,7 +78,7 @@ async function getFolderFromId(folderId) {
   return folder;
 }
 
-async function createFileData(name, size, uploadedAt, folderId, userId, url) {
+async function createFileData(name, size, uploadedAt, folderId, userId, url, path) {
   const file = await prisma.file.create({
     data: {
       name,
@@ -86,7 +86,8 @@ async function createFileData(name, size, uploadedAt, folderId, userId, url) {
       uploadedAt,
       folderId,
       userId,
-      url
+      url,
+      path
     }
   })
 
@@ -114,6 +115,16 @@ async function checkIfFileExists(filename, folderId) {
   return !!exist;
 }
 
+async function deleteFile(id) {
+  const file = await prisma.file.delete({
+    where: {
+      id
+    }
+  })
+
+  return file;
+}
+
 module.exports = {
   findUser,
   findUserWithID,
@@ -124,5 +135,6 @@ module.exports = {
   getFolderFromId,
   createFileData,
   getFileFromId,
-  checkIfFileExists
+  checkIfFileExists,
+  deleteFile
 };
