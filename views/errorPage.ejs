@@ -9,10 +9,12 @@
 </head>
 
 <body>
-    <%- include("partials/header.ejs") %>
-  <div class="main">
-    <%=title%>
-    <p><%=code %> : <%=error %></p>
+  <%- include("partials/header.ejs") %>
+  <div class="main top">
+    <div class="errorPage">
+      <h3>Oops! Something went wrong.</h3>
+      <p>Error code <%=code %> : <%=error %></p>
+    </div>
   </div>
   <%- include("partials/footer.ejs") %>
 

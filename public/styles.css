@@ -540,6 +540,28 @@ td {
   font-size: 14px;
 }
 
+/* ERROR PAGE */
+.main.top {
+  justify-content:start;
+}
+
+.main .errorPage {
+  background-color: white;
+  padding: 20px;
+  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
+  font-family: "Lexend", sans-serif;
+}
+
+.main .errorPage h3 {
+  color: rgb(20, 55, 88);
+  font-size: 22px;
+}
+
+.main .errorPage p {
+  font-weight: 300;
+}
+
+
 /* FOOTER */
 
 .footer {
