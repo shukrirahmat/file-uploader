@@ -1,7 +1,8 @@
 const { body, validationResult } = require("express-validator");
 const asyncHandler = require("express-async-handler");
 const db = require("../db/queries");
-const PageNotFoundError = require("../errors/PageNotFoundError")
+const PageNotFoundError = require("../errors/PageNotFoundError");
+const supabase = require("../storage/supabaseConfig");
 
 const validateName = [
   body("folderName")
@@ -46,7 +47,21 @@ const getFolderPage = asyncHandler(async (req, res) => {
   res.render("folder", {title: folder.name, folder});
 })
 
+const deleteFolder = asyncHandler(async (req,res) => {
+  const folder = await db.getFolderFromId(req.body.folderId);
+  const filePaths = [];
+  folder.files.forEach((file)=> {
+    filePaths.push(file.path)
+  })
+  if (filePaths.length > 0) {
+    const {data, error} = await supabase.storage.from('odin_file_uploader').remove(filePaths);
+  } 
+  await db.deleteFolder(req.body.folderId);
+  res.redirect("/");
+})
+
 module.exports = {
   createNewFolder,
-  getFolderPage
+  getFolderPage,
+  deleteFolder
 };

@@ -33,7 +33,11 @@
         <div class="folderContainer">
           <% locals.folders.forEach((folder) => { %>
           <li class="folder">
-            <a href="/folder?id=<%=folder.id%>"><img src="/images/folder-alt-svgrepo-com.svg"><%=folder.name %></a>
+            <a href="/folder?id=<%=folder.id%>"><img class="folderImg" src="/images/folder-alt-svgrepo-com.svg"><%=folder.name %></a>
+            <form action="/folder/delete" method="post">
+              <input type="hidden" name="folderId" value="<%=folder.id%>">
+              <button class="folderDeleteBtn">DELETE</button>
+            </form>
           </li>
           <% }) %>
         </div>

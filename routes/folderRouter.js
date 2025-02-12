@@ -5,5 +5,6 @@ const checkAuthenticated = require("../auth/checkAuthenticated")
 
 router.get("/", checkAuthenticated, folderController.getFolderPage);
 router.post("/new", folderController.createNewFolder);
+router.post("/delete", folderController.deleteFolder);
 
 module.exports = router;

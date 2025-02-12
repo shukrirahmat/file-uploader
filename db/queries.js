@@ -125,6 +125,20 @@ async function deleteFile(id) {
   return file;
 }
 
+async function deleteFolder(id) {
+  await prisma.file.deleteMany({
+    where: {
+      folderId: id
+    }
+  })
+
+  await prisma.folder.delete({
+    where: {
+      id
+    }
+  })
+}
+
 module.exports = {
   findUser,
   findUserWithID,
@@ -136,5 +150,6 @@ module.exports = {
   createFileData,
   getFileFromId,
   checkIfFileExists,
-  deleteFile
+  deleteFile,
+  deleteFolder
 };
