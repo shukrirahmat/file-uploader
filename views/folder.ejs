@@ -38,12 +38,27 @@
           <% if (locals.folder.files.length < 1) { %>
           <p>The folder is empty</p>
           <% } else { %>
-          <% locals.folder.files.forEach((file) => { %>
-          <div>
-            <p><%=file.name %></p>
-            <a href="/file?id=<%=file.id%>">VIEW</a>
-          </div>
-          <%}) }%>
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Size (kb)</th>
+                <th scope="col">Date Uploaded</th>
+                <th scope="col">Link</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% locals.folder.files.forEach((file) => { %>
+              <tr>
+                <th scope="row"><%=file.name%></th>
+                <td><%=parseFloat(file.size/1024).toFixed(1)%></td>
+                <td><%=file.uploadedAt.toISOString().substring(0, 10)%></td>
+                <td><a href="/file/download?id=<%=file.id%>">DOWNLOAD</a></td>
+              </tr>
+              <%}) %>
+            </tbody>
+          </table>
+          <% }%>
         </div>
       </div>
     </div>

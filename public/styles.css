@@ -366,6 +366,59 @@ body {
 
 .main .folderPage .currentFolder > div {
   padding: 20px;
+  font-weight: 300;
+}
+
+/* TABLE */
+table {
+  table-layout: fixed;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead {
+  border-bottom: 1px solid black;
+  background-color: rgba(20, 55, 88, 0.2);
+}
+
+thead th {
+  color:rgb(20, 55, 88);
+}
+
+tbody th {
+  font-weight: 300;
+  color: black;
+}
+
+thead th:nth-child(1) {
+  width: 40%;
+}
+
+thead th:nth-child(2) {
+  width: 20%;
+}
+
+thead th:nth-child(3) {
+  width: 20%;
+}
+
+thead th:nth-child(4) {
+  width: 20%;
+}
+
+td {
+  font-weight: 300;
+}
+
+td a {
+  font-weight: normal;
+  color:rgb(20, 55, 88);
+}
+
+th,
+td {
+  padding: 10px 20px;
+  text-align: center;
 }
 
 /* LOG-IN PAGE */
