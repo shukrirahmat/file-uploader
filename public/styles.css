@@ -372,7 +372,7 @@ body {
   padding: 10px 20px;
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: baseline;
   gap: 10px;
 }
 
@@ -384,6 +384,24 @@ body {
   width: 25px;
   height: auto;
   filter: invert(1);
+  align-self: center;
+}
+
+.main .folderPage .currentFolder .folderHead a{
+  font-family: "Lexend", sans-serif;
+  font-weight: bold;
+  border: 1px solid rgb(215, 225, 225);
+  padding: 2px 10px;
+  border-radius: 10px;
+  color: rgb(215, 225, 225);
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.main .folderPage .currentFolder .folderHead a:hover{
+  cursor: pointer;
+  background-color: rgb(215, 225, 225);
+  color: rgb(20, 55, 88);
 }
 
 .main .folderPage .currentFolder > div {
@@ -579,6 +597,86 @@ table .fileDeleteBtn:hover {
   font-weight: 300;
   font-size: 14px;
 }
+
+/* SHARING FORM*/
+
+.main .sharingForm {
+  background-color: white;
+  align-self: center;
+  padding: 50px;
+  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  font-family: "Lexend", sans-serif;
+}
+
+.main .sharingForm h3 {
+  color: rgb(20, 55, 88);
+  font-size: 22px;
+}
+
+.main .sharingForm > div {
+  font-weight: 300;
+  align-self: stretch;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px
+}
+
+.main .sharingForm select, option {
+  flex: 1;
+  font-size: 16px;
+  font-family: "Lexend", sans-serif;
+  font-weight: 300;
+}
+
+.main .sharingForm button {
+  margin-top: 10px;
+  background-color: rgb(20, 55, 88);
+  font-family: "Lexend", sans-serif;
+  font-weight: bold;
+  font-size: 16px;
+  padding: 5px 10px;
+  border: none;
+  color:  rgb(215, 225, 225);
+}
+
+.main .sharingForm button:hover {
+  cursor: pointer;
+  background-color: rgb(5, 40, 73);
+}
+
+/* SHARE SUCCESS PAGE */
+.main .shareSuccess {
+  background-color: white;
+  align-self: center;
+  padding: 50px;
+  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  font-family: "Lexend", sans-serif;
+}
+
+.main .shareSuccess h3{
+  color: rgb(20, 55, 88);
+  font-size: 22px;
+}
+
+.main .shareSuccess a{
+  font-weight: 300;
+}
+
+.main .shareSuccess p{
+  font-weight: 300;
+  font-size: 14px;
+  text-align: center;
+}
+
+
 
 /* ERROR PAGE */
 .main.top {

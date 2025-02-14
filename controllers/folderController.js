@@ -3,6 +3,7 @@ const asyncHandler = require("express-async-handler");
 const db = require("../db/queries");
 const PageNotFoundError = require("../errors/PageNotFoundError");
 const supabase = require("../storage/supabaseConfig");
+const {add} = require("date-fns");
 
 const validateName = [
   body("folderName")
@@ -47,6 +48,17 @@ const getFolderPage = asyncHandler(async (req, res) => {
   res.render("folder", {title: folder.name, folder});
 })
 
+const getSharingPage = asyncHandler(async (req,res) => {
+  const folderId = req.query.id
+  const folder = await db.getFolderFromId(folderId);
+
+  if (!folder || req.user.id !== folder.userId) {
+    throw new PageNotFoundError("The requested folder cannot be found");
+  }
+
+  res.render("sharing", {title: "Sharing", folder})
+})
+
 const deleteFolder = asyncHandler(async (req,res) => {
   const folder = await db.getFolderFromId(req.body.folderId);
   const filePaths = [];
@@ -60,8 +72,19 @@ const deleteFolder = asyncHandler(async (req,res) => {
   res.redirect("/");
 })
 
+const shareFolder = asyncHandler(async (req,res) => {
+  const folderId = req.body.folderId;
+  const duration = parseInt(req.body.duration);
+  const publicUntil = add(new Date(), {hours: duration});
+  await db.shareFolder(folderId, publicUntil);
+  const url = req.protocol + '://' + req.get('host') + `/folder?id=${folderId}`;
+  res.render("shareSuccess", {title:"Share Success", url, duration})
+})
+
 module.exports = {
   createNewFolder,
   getFolderPage,
-  deleteFolder
+  deleteFolder,
+  getSharingPage,
+  shareFolder
 };

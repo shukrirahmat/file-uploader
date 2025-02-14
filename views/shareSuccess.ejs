@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%=title%></title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+
+<body>
+  <%- include("partials/header.ejs") %>
+  <div class="main">
+    <div class="shareSuccess">
+        <h3>The folder is now publicly shared</h3>
+        <a href="<%=url%>"> <%=url%></a>
+        <p>This link will be available to everyone for <%=duration%> hour(s)</p>
+    </div>
+    </div>
+  </div>
+  <%- include("partials/footer.ejs") %>
+
+</body>
+
+</html>
