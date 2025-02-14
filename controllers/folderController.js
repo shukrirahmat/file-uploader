@@ -3,7 +3,7 @@ const asyncHandler = require("express-async-handler");
 const db = require("../db/queries");
 const PageNotFoundError = require("../errors/PageNotFoundError");
 const supabase = require("../storage/supabaseConfig");
-const {add} = require("date-fns");
+const {add, differenceInMinutes} = require("date-fns");
 
 const validateName = [
   body("folderName")
@@ -40,12 +40,25 @@ const createNewFolder = [
 const getFolderPage = asyncHandler(async (req, res) => {
   const folderId = req.query.id
   const folder = await db.getFolderFromId(folderId);
- 
-  if (!folder || req.user.id !== folder.userId) {
-    throw new PageNotFoundError("The requested folder cannot be found");
-  }
 
-  res.render("folder", {title: folder.name, folder});
+  if (req.folderShared) {
+    if (req.isUnauthenticated() || req.user.id !== folder.userId) {
+      const user = await db.findUserWithID(folder.userId);
+      return res.render("folder", {title: folder.name, folder, sharedGuest: true, ownerName: user.username});
+    } else {
+      const time = differenceInMinutes(folder.publicUntil, new Date());
+      const hours = Math.floor(time/60);
+      const minutes = time % 60;
+      const timeLeft = hours > 0? hours + " hours " + minutes + " minutes" : minutes + " minutes";
+      return res.render("folder", {title: folder.name, folder, sharedOwner: true, timeLeft});
+    }
+  } else {
+    if (req.isUnauthenticated() || req.user.id !== folder.userId) {
+      throw new PageNotFoundError("The requested folder cannot be found");
+    } else {
+      return res.render("folder", {title: folder.name, folder});
+    }
+  }
 })
 
 const getSharingPage = asyncHandler(async (req,res) => {
@@ -81,10 +94,19 @@ const shareFolder = asyncHandler(async (req,res) => {
   res.render("shareSuccess", {title:"Share Success", url, duration})
 })
 
+const unshareFolder = asyncHandler(async (req,res) => {
+  const folderId = req.body.folderId;
+  const folder = await db.getFolderFromId(req.body.folderId);
+  await db.unshareFolder(folderId);
+  return res.render("folder", {title: folder.name, folder});
+
+})
+
 module.exports = {
   createNewFolder,
   getFolderPage,
   deleteFolder,
   getSharingPage,
-  shareFolder
+  shareFolder,
+  unshareFolder
 };

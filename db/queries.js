@@ -150,6 +150,17 @@ async function shareFolder(id, publicUntil) {
   })
 } 
 
+async function unshareFolder(id) {
+  const updateFolder = await prisma.folder.update({
+    where: {
+      id
+    },
+    data: {
+      publicUntil: null
+    }
+  })
+}
+
 module.exports = {
   findUser,
   findUserWithID,
@@ -163,5 +174,6 @@ module.exports = {
   checkIfFileExists,
   deleteFile,
   deleteFolder,
-  shareFolder
+  shareFolder,
+  unshareFolder
 };
