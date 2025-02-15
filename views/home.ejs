@@ -13,35 +13,38 @@
   <% if (locals.currentUser) { %>
   <%- include("partials/header.ejs") %>
   <div class="main">
-    <div class="dashboard">
-      <h2 class="welcome">Welcome, <%=currentUser.username %></h2>
+    <div class="homepanels">
+      <div class="dashboard">
+        <h2 class="welcome">Welcome, <%=currentUser.username %></h2>
 
-      <form class="newfolder" action="/folder/new" method="post">
-        <h3>Create new folder</h3>
-        <hr>
-        <div>
-          <input type="text" name="folderName" placeholder="Enter folder name...">
-          <button>CREATE</button>
-          <%- include("partials/folderNameError.ejs") %>
+        <form class="newfolder" action="/folder/new" method="post">
+          <h3>Create new folder</h3>
+          <hr>
+          <div>
+            <input type="text" name="folderName" placeholder="Enter folder name...">
+            <button>CREATE</button>
+            <%- include("partials/folderNameError.ejs") %>
 
-        </div>
-      </form>
+          </div>
+        </form>
 
-      <div class="folderList">
-        <h3>Your Folders</h3>
-        <hr>
-        <div class="folderContainer">
-          <% locals.folders.forEach((folder) => { %>
-          <li class="folder">
-            <a href="/folder?id=<%=folder.id%>"><img class="folderImg" src="/images/folder-alt-svgrepo-com.svg"><%=folder.name %></a>
-            <form action="/folder/delete" method="post">
-              <input type="hidden" name="folderId" value="<%=folder.id%>">
-              <button class="folderDeleteBtn">DELETE</button>
-            </form>
-          </li>
-          <% }) %>
+        <div class="folderList">
+          <h3>Your Folders</h3>
+          <hr>
+          <div class="folderContainer">
+            <% locals.folders.forEach((folder) => { %>
+            <li class="folder">
+              <a href="/folder?id=<%=folder.id%>"><img class="folderImg" src="/images/folder-alt-svgrepo-com.svg"><%=folder.name %></a>
+              <form action="/folder/delete" method="post">
+                <input type="hidden" name="folderId" value="<%=folder.id%>">
+                <button class="folderDeleteBtn">DELETE</button>
+              </form>
+            </li>
+            <% }) %>
+          </div>
         </div>
       </div>
+      <%- include("partials/publicFolder.ejs") %>
     </div>
   </div>
   <%- include("partials/footer.ejs") %>
@@ -50,13 +53,16 @@
   <% } else { %>
   <%- include("partials/header.ejs") %>
   <div class="main">
-    <div class="notLogged">
-      <div class="quoteContainer">
-        <p class="quote">“Take care of all your memories. For you cannot relieve them.”</p>
-        <p class="quoter">- Bob Dylan</p>
+    <div class="homepanels">
+      <div class="notLogged">
+        <div class="quoteContainer">
+          <p class="quote">“Take care of all your memories. For you cannot relieve them.”</p>
+          <p class="quoter">- Bob Dylan</p>
+        </div>
+        <div class="photoref">Photo by <a href="https://unsplash.com/@sarandywestfall_photo?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">sarandy westfall</a> on <a href="https://unsplash.com/photos/several-portraits-on-top-of-white-textile-qqd8APhaOg4?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+        </div>
       </div>
-      <div class="photoref">Photo by <a href="https://unsplash.com/@sarandywestfall_photo?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">sarandy westfall</a> on <a href="https://unsplash.com/photos/several-portraits-on-top-of-white-textile-qqd8APhaOg4?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
-      </div>
+      <%- include("partials/publicFolder.ejs") %>
     </div>
   </div>
   <%- include("partials/footer.ejs") %>

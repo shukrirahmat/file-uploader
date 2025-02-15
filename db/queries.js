@@ -1,4 +1,5 @@
 const { PrismaClient } = require("@prisma/client");
+const {isAfter} = require("date-fns");
 
 const prisma = new PrismaClient();
 
@@ -139,13 +140,14 @@ async function deleteFolder(id) {
   })
 }
 
-async function shareFolder(id, publicUntil) {
+async function shareFolder(id, publicUntil, onDashboard) {
   const updateFolder = await prisma.folder.update({
     where: {
       id
     },
     data: {
-      publicUntil
+      publicUntil,
+      onDashboard
     }
   })
 } 
@@ -156,9 +158,31 @@ async function unshareFolder(id) {
       id
     },
     data: {
-      publicUntil: null
+      publicUntil: null,
+      onDashboard: false
     }
   })
+}
+
+async function getPublicFolder() {
+  const publicFolder = await prisma.folder.findMany({
+    where: {
+      onDashboard: true
+    },
+
+    include: {
+      owner: true
+    }
+  })
+
+  const filterPublicFolder = publicFolder.filter((folder) => {
+    if (!folder.publicUntil) {
+      return false
+    }
+    return isAfter(folder.publicUntil, new Date());
+  })
+
+  return filterPublicFolder;
 }
 
 module.exports = {
@@ -175,5 +199,6 @@ module.exports = {
   deleteFile,
   deleteFolder,
   shareFolder,
-  unshareFolder
+  unshareFolder,
+  getPublicFolder
 };

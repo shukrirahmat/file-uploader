@@ -1,0 +1,9 @@
+<div class="publicFolder">
+    <h3>Shared Folders</h3>
+    <hr>
+    <div>
+    <% locals.publicFolders.forEach((folder) => { %>
+        <p><a href="/folder/?id=<%=folder.id%>"><%=folder.name%></a> by <%=folder.owner.username%></p>
+    <% }) %>
+</div>
+</div>

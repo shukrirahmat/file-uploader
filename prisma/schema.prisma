@@ -35,6 +35,7 @@ model Folder {
   userId String
   files  File[]
   publicUntil DateTime?
+  onDashboard Boolean @default(false)
 
   @@unique([userId, name])
 }

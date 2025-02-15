@@ -86,8 +86,16 @@ body {
 
 /* HOME PAGE */
 
-.main .notLogged {
+.main .homepanels {
   flex: 1;
+  display: flex;
+  flex-direction: row;
+  gap: 50px;
+  align-items: stretch;
+}
+
+.main .notLogged {
+  flex: 3;
   margin-bottom: 20px;
   display: flex;
   flex-direction: column;
@@ -124,7 +132,7 @@ body {
 .main .quote {
   font-family: "Neuton", serif;
   color: rgb(20, 55, 88);
-  font-size: 40px;
+  font-size: 35px;
   text-align: center;
 }
 
@@ -137,7 +145,7 @@ body {
 
 .main .dashboard {
   font-family: "Lexend", sans-serif;
-  flex: 1;
+  flex: 3;
   display: flex;
   flex-direction: column;
   gap: 20px
@@ -283,6 +291,57 @@ body {
   margin-bottom: 10px;
 }
 
+.main .publicFolder {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background-color: white;
+  padding: 20px;
+  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2); 
+  overflow-y: scroll;
+}
+
+.main .publicFolder h3{
+  font-family: "Lexend", sans-serif;
+  color: rgb(20, 55, 88);
+  font-size: 20px;
+}
+
+.main .publicFolder hr{
+  margin-top: -5px;
+  margin-bottom: 10px;
+}
+
+.main .publicFolder > div {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.main .publicFolder p {
+  font-family: "Lexend", sans-serif;
+  font-weight: 300;
+}
+
+.main .publicFolder a {
+  font-family: "Lexend", sans-serif;
+  font-weight: normal;
+}
+
+.publicFolder::-webkit-scrollbar {
+  width: 15px;
+}
+
+.publicFolder::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+.publicFolder::-webkit-scrollbar-thumb {
+  color: rgb(20, 55, 88);
+  border-radius: 10px;
+}
+
 /* FOLDER PAGE */
 
 .main .folderPage {
@@ -307,6 +366,14 @@ body {
   color: rgb(20, 55, 88);
   font-size: 22px;
 }
+
+.main .folderPage .fileUpload h3 span{
+  font-family: "Lexend", sans-serif;
+  color: black;
+  font-weight: 300;
+  font-size: 14px;
+}
+
 
 .main .folderPage .fileUpload > div {
   position: relative;

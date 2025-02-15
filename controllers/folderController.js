@@ -26,9 +26,11 @@ const createNewFolder = [
     }
     if (errorArray.length > 0) {
       const folders = await db.getAllFolders(req.user.id);
+      const publicFolders = await db.getPublicFolder();
       return res.status(400).render("home", {
         title: "Homepage",
         folders,
+        publicFolders,
         errors: errorArray,
       });
     }
@@ -89,7 +91,8 @@ const shareFolder = asyncHandler(async (req,res) => {
   const folderId = req.body.folderId;
   const duration = parseInt(req.body.duration);
   const publicUntil = add(new Date(), {hours: duration});
-  await db.shareFolder(folderId, publicUntil);
+  const onDashboard = req.body.onDashboard? true : false;
+  await db.shareFolder(folderId, publicUntil, onDashboard);
   const url = req.protocol + '://' + req.get('host') + `/folder?id=${folderId}`;
   res.render("shareSuccess", {title:"Share Success", url, duration})
 })

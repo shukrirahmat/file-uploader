@@ -15,7 +15,7 @@
 
       <% if (!locals.sharedGuest) { %>
       <form class="fileUpload" action="/file/upload" method="post" enctype="multipart/form-data">
-        <h3>Upload to "<%=title %>"</h3>
+        <h3>Upload to "<%=title %>" <span>( 5 MB Max. )</span></h3>
         <hr>
         <div>
           <input type="file" name="uploaded_file">
@@ -40,7 +40,7 @@
           <img src="/images/folder-alt-svgrepo-com.svg">
           <h3><%=title%></h3>
           <p>Shared: <%=timeLeft%> left</p>
-          <a href="/folder/share?id=<%=folder.id%>">EDIT DURATION</a>
+          <a href="/folder/share?id=<%=folder.id%>">EDIT SHARING</a>
           <form class="unshare" action="/folder/unshare" method="post">
             <input type="hidden" name="folderId" value="<%=folder.id%>">
             <button>STOP SHARING</button>
