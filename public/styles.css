@@ -132,7 +132,7 @@ body {
 .main .quote {
   font-family: "Neuton", serif;
   color: rgb(20, 55, 88);
-  font-size: 35px;
+  font-size: 30px;
   text-align: center;
 }
 
@@ -520,19 +520,19 @@ tbody th {
 }
 
 thead th:nth-child(2) {
-  width: 15%;
+  width: 20%;
 }
 
 thead th:nth-child(3) {
-  width: 15%;
+  width: 20%;
 }
 
 thead th:nth-child(4) {
-  width: 15%;
+  width: 20%;
 }
 
 thead th:nth-child(5) {
-  width: 15%;
+  width: 20%;
 }
 
 td {
